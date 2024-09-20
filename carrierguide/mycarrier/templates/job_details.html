@@ -1,0 +1,187 @@
+{% extends 'index.html' %}
+{% block content %}
+
+{% load static %}
+
+
+
+
+
+
+
+
+    <main>
+      
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+           
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>{{job.JOB_TITLE}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Hero Area End -->
+        <!-- job post company Start -->
+        <div class="job-post-company pt-120 pb-120">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <!-- Left Content -->
+                    <div class="col-xl-7 col-lg-8">
+                        <!-- job single -->
+                        <div class="single-job-items mb-50">
+                            <div class="job-items">
+                                <div class="company-img company-img-details">
+                                    <a href="#"><img src="{{ job.DETAILS_OF_COMPANY.COMPANY_LOGO.url}}" alt=""></a>
+                                </div>
+                                <div class="job-tittle">
+                                    <a href="#">
+                                        <h4>{{job.JOB_POSITION}}</h4>
+                                    </a>
+                                    <ul>
+                                        <li>{{job.DETAILS_OF_COMPANY.COMPANY_NAME}}</li>
+                                        <li><i class="fas fa-map-marker-alt"></i>{{job.JOB_STATE}}, {{job.JOB_LOCATION}}</li>
+                                        <li>{{job.JOB_SALARY}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- job single End -->
+                       
+                        <div class="job-post-details">
+                            <div class="post-details1 mb-50">
+                                <!-- Small Section Tittle -->
+                                <div class="small-section-tittle">
+                                    <h4>Job Description</h4>
+                                </div>
+                                <p>{{job.JOB_DESCRIPTION}}</p>
+                            </div>
+                            <div class="post-details2  mb-50">
+                                 <!-- Small Section Tittle -->
+                                <div class="small-section-tittle">
+                                    <h4>Required Knowledge, Skills, and Abilities</h4>
+                                </div>
+                               <ul>
+                                   <li>{{job.JOB_REQUIRED_KNOWLEDGE}}</li>
+                                   <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
+                                   <!-- <li>Research and code , libraries, APIs and frameworks</li>
+                                   <li>Strong knowledge on software development life cycle</li>
+                                   <li>Strong problem solving and debugging skills</li> -->
+                               </ul>
+                            </div>
+                            <div class="post-details2  mb-50">
+                                 <!-- Small Section Tittle -->
+                                <div class="small-section-tittle">
+                                    <h4>Education + Experience</h4>
+                                </div>
+                               <ul>
+                                   <li>{{job.JOB_EDUCATION_EXPERIENCE}}</li>
+                                   <li>Direct response email experience</li>
+                                   <li>Ecommerce website design experience</li>
+                                   <li>Familiarity with mobile and web apps preferred</li>
+                                   <li>Experience using Invision a plus</li>
+                               </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Right Content -->
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="post-details3  mb-50">
+                            <!-- Small Section Tittle -->
+                           <div class="small-section-tittle">
+                               <h4>Job Overview</h4>
+                           </div>
+                          <ul>
+                              <li>Posted date : <span>{{job.JOB_POSTED_DATE}}</span></li>
+                              <li>Location : <span>{{job.JOB_LOCATION}}</span></li>
+                              <li>Vacancy : <span>{{job.JOB_NUMBER_OF_VACANCY}}</span></li>
+                              <li>Job nature : <span>{{job.JOB_NATURE}}</span></li>
+                              <li>Salary :  <span>{{job.JOB_SALARY}}</span></li>
+                              <li>Application End date : <span>{{job.JOB_APPLICATION_END_DATE}}</span></li>
+                          </ul>
+
+                         <div class="apply-btn2">
+                            {% if request.session.is_logged_in_em %}
+                            <a href="{% url 'apply_job' job.id %}" class="btn">Apply Now</a>
+                            {% endif %}
+                         </div>
+
+                         <br><br>
+                         <div class="apply-btn2">
+                            <a href="{% url 'index' %}" class="btn">Back</a>
+                         </div>
+                       </div>
+                        <div class="post-details4  mb-50">
+                            <!-- Small Section Tittle -->
+                           <div class="small-section-tittle">
+                               <h4>Company Information</h4>
+                           </div>
+                              <span>Colorlib</span>
+                              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                            <!-- <ul>
+                                <li>Name: <span>Colorlib </span></li>
+                                <li>Web : <span> colorlib.com</span></li>
+                                <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                            </ul> -->
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+        <!-- job post company End -->
+
+    </main>
+
+
+
+
+
+    
+    
+
+	<!-- JS here -->
+	
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static  'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{%  static  'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static 'js/jquery.slicknav.min.js'  %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static  'js/slick.min.js' %}"></script>
+        <script src="{% static  'js/price_rangs.js' %}"></script>
+        
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static  'js/wow.min.js' %}"></script>
+		<script src="{% static  'js/animated.headline.js'  %}"></script>
+        <script src="{% static   'js/jquery.magnific-popup.js' %}"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static  'js/jquery.nice-select.min.js'  %}"></script>
+		<script src="{% static  'js/jquery.sticky.js' %}"></script>
+        
+        <!-- contact js -->
+        <script src="{% static 'js/contact.js' %}"></script>
+        <script src="{% static   'js/jquery.form.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/mail-script.js' %}"></script>
+        <script src="{%  static 'js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

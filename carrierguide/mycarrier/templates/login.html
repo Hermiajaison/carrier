@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% block content %}
+
+{% load static %}
+
+<style>
+
+.modal-content{
+			background-color: darkcyan;
+		}
+		.btn-link{
+			color:white;
+		}
+		.modal-heading h2{
+			color:#ffffff;
+		}
+</style>
+
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-heading">
+            <h2 class="text-center">Login</h2>
+            {% for m in messages %}
+            <h6>{{m}}</h6>
+            {% endfor %}
+        </div>
+        <hr />
+        <div class="modal-body">
+            <form action="{% url 'login' %}" method="post" role="form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input type="email" name="email"  class="form-control" placeholder="User Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="password" name="password" class="form-control" placeholder="Password" />
+
+                    </div>
+
+                </div>
+
+                <div class="form-group text-center">
+                    {% if message  %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning" role="alert">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <button type="submit" class="btn btn-success btn-lg">Login</button>
+                    <a href="{% url 'change_password' %}" class="btn btn-link">Change Password</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

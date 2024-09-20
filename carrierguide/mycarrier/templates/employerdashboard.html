@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css/dist/index.css);
+</style>
+<body>
+  <!-- Banner -->
+<a href="https://webpixels.io/components?ref=codepen" class="btn w-full btn-primary text-truncate rounded-0 py-2 border-0 position-relative" style="z-index: 1000;">
+  <strong>Crafted with Webpixels CSS:</strong> The design system for Bootstrap 5. Browse all components →
+</a>
+
+<div class="p-10 bg-surface-secondary">
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-soft-success text-success">
+      <button type="submitt" style="position: absolute; left: 1150px;" ><a href="{% url 'index' %}">Home</a></button>
+      <h6>Applicants</h6>
+      
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover table-nowrap">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Profession</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Education</th>
+            <th scope="col">Skills</th>
+
+            <th scope="col">State</th>
+            <th scope="col">Location</th>
+            <th scope="col">Experience</th>
+            <th scope="col">English Level</th>
+            <th scope="col">Resume</th>
+            <th scope="col">Action</th>
+
+
+
+
+
+
+
+            <th></th>
+          </tr>
+        </thead>
+        {% for d in applicants %}
+        <tbody>
+          <tr>
+            <td data-label="Job Title">
+              <img alt="..." src="{{d.DETAILS_OF_EMPLOYER.jobseeker_IMAGE.url}}" class="avatar avatar-sm rounded-circle me-2">
+              <a class="text-heading font-semibold" href="#">
+                {{ d.DETAILS_OF_EMPLOYER.jobseeker_name }}
+              </a>
+            </td>
+            <td data-label="Email">
+              <span>{{ d.DETAILS_OF_EMPLOYER.jobseeker_profession }}</span>
+            </td>
+            <td data-label="Phone">
+              <a class="text-current" href="mailto:robert.fox@example.com">{{ d.DETAILS_OF_EMPLOYER.EMAIL }}</a>
+            </td>
+            <td data-label="Lead Score">
+              <a class="text-current" href="tel:202-555-0152"> {{ d.DETAILS_OF_EMPLOYER.jobseeker_mobilenumber }}</a>
+            </td>
+            
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_address }}</a>
+            </td>
+            <td data-label="Company">
+              <span class="badge bg-soft-success text-success">{{ d.DETAILS_OF_EMPLOYER.jobseeker_education }}</span>
+            </td>
+            <td data-label="Company">
+              <span class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_skills }}</span>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_state }}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_location}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_experience}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYER.jobseeker_englishlevel}}</a>
+            </td>
+           
+            <td data-label="">
+              <form action="{{ d.DETAILS_OF_EMPLOYER.jobseeker_resume.url }}" method="get">
+                <button type="submit" class="text-current">
+                  View Resume
+                </button>
+              </form>
+            </td>
+            
+            <td>
+              <form method="post" action="{% url 'job_accept' d.id %}">
+                {% csrf_token %}
+              <button type="submit" >accept</button>
+              </form><br>
+
+              <form method="post" action="{% url 'job_reject' d.id %}">
+                {% csrf_token %}
+              <button type="submit" >Reject</button>
+              </form>
+
+            </td>
+            
+          </tr>
+          {% endfor %}
+
+
+
+
+
+
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

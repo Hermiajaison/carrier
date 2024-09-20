@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="manifest" href="site.webmanifest">
+  <title>Document</title>
+  <style>
+    body{margin-top:20px; background-color:#f2f6fc; color:#69707a;}
+    .img-account-profile { height: 10rem; }
+    .rounded-circle { border-radius: 50% !important; }
+    .card { box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%); }
+    .card .card-header { font-weight: 500; }
+    .card-header:first-child { border-radius: 0.35rem 0.35rem 0 0; }
+    .card-header { padding: 1rem 1.35rem; margin-bottom: 0; background-color: rgba(33, 40, 50, 0.03); border-bottom: 1px solid rgba(33, 40, 50, 0.125); }
+    .form-control, .dataTable-input { display: block; width: 100%; padding: 0.875rem 1.125rem; font-size: 0.875rem; font-weight: 400; line-height: 1; color: #69707a; background-color: #fff; background-clip: padding-box; border: 1px solid #c5ccd6; border-radius: 0.35rem; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+    .nav-borders .nav-link.active { color: #0061f2; border-bottom-color: #0061f2; }
+    .nav-borders .nav-link { color: #69707a; border-bottom-width: 0.125rem; border-bottom-style: solid; border-bottom-color: transparent; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 0; padding-right: 0; margin-left: 1rem; margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Profile</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a>
+    </nav>
+    
+        <div class="col-xl-8">
+            <!-- Account details card-->
+         
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'emrdetails' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">COMPANY NAME</label>
+                            <input class="form-control" id="inputUsername" name="COMPANY_NAME" type="text" value="{{ employer.COMPANY_NAME }}">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputName">NAME</label>
+                                <input class="form-control" id="EMPLOYER_NAME" type="text" name="EMPLOYER_NAME" value="{{ employer.EMPLOYER_NAME }}">
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputstate">STATE</label>
+                                <input class="form-control" id="employerstate" name="EMPLOYER_STATE" type="text" value="{{ employer.EMPLOYER_STATE }}">
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">JOB NATURE</label>
+                                <input class="form-control" id="jobnature" name="EMPLOYER_JOB_NATURE" type="text" value="{{ employer.EMPLOYER_JOB_NATURE}}">
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">LOCATION</label>
+                                <input class="form-control" id="inputLocation" name="EMPLOYER_LOCATION" type="text" placeholder="Enter your location" value="{{employer.EMPLOYER_LOCATION}}">
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <!-- <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" id="inputEmailAddress" name="EMPLOYER_EMAIL" type="email" placeholder="Enter your email address" value="name@example.com">
+                        </div> -->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">PROFESSION</label>
+                            <input class="form-control" id="profession" name="EMPLOYER_PROFESSION" type="text" value="{{employer.EMPLOYER_PROFESSION}}">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">PHONE NUMBER</label>
+                                <input class="form-control" id="inputPhone" name="EMPLOYER_PHONE" type="tel" placeholder="Enter your phone number" value="{{employer.EMPLOYER_PHONE}}">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">AGE</label>
+                                <input class="form-control" id="inputBirthday" name="EMPLOYER_AGE" type="text" value="{{employer.EMPLOYER_AGE}}">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    </form>
+
+
+
+                        <form method="post" action="{% url 'employer_image_logo' %}" enctype="multipart/form-data" > 
+                            {% csrf_token %}
+                        <!-- Form Group (employer photo) -->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputEmployerPhoto">PHOTO</label>
+                                <input class="form-control-file" id="inputEmployerPhoto" name="EMPLOYER_IMAGE" type="file" accept="image" >
+                            </div>
+                            <!-- Form Group (company logo) -->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputCompanyLogo">LOGO</label>
+                                <input class="form-control-file" id="inputCompanyLogo" name="COMPANY_LOGO" type="file" accept="image">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </form>
+
+
+                        
+                        
+
+
+                </div>
+            </div>
+         
+        </div>
+    </div>
+  </div>
+</body>
+</html>
