@@ -1,0 +1,615 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="manifest" href="site.webmanifest">
+    <title>Document</title>
+</head>
+<style>
+    /* CSS Document */
+body{
+  background:#EEE
+}
+.breakingNews{width:100%; height:40px; background:#FFF; position:relative; border:solid 2px #2096cd; overflow:hidden;}
+.breakingNews>.bn-title{width:auto; height:40px; display:inline-block; background:#2096cd; position:relative;}
+.breakingNews>.bn-title>h2{display:inline-block; margin:0; padding:0 20px; line-height:40px; font-size:20px; color:#FFF; height:40px; box-sizing:border-box;}
+.breakingNews>.bn-title>span{width: 0;position:absolute;right:-10px;top:10px;height: 0;border-style: solid;border-width: 10px 0 10px 10px;border-color: transparent transparent transparent #2096cd;}
+
+.breakingNews>ul{padding:0; margin:0; list-style:none; position:absolute; left:210px; top:0; right:40px; height:40px; font-size:16px;}
+.breakingNews>ul>li{position:absolute; height:40px; width:100%; line-height:40px; display:none;}
+.breakingNews>ul>li>a{text-decoration:none; color:#333; overflow:hidden; display:block; white-space: nowrap;text-overflow: ellipsis; font-weight:normal;}
+.breakingNews>ul>li>a>span{color:#2096cd;}
+.breakingNews>ul>li>a:hover{color:#2096cd;}
+
+.breakingNews>.bn-navi{width:40px; height:40px; position:absolute; right:0; top:0; opacity:0;}
+.breakingNews>.bn-navi>span{width:20px; height:40px; position:absolute; top:0; cursor:pointer; opacity:0.3; background-image:url(../img/bn-arrows.png); background-repeat:no-repeat;}
+.breakingNews>.bn-navi>span:hover{opacity:1;}
+.breakingNews>.bn-navi>span:first-child{background-position:left center; left:0;}
+.breakingNews>.bn-navi>span:last-child{background-position:right center; right:0;}
+.breakingNews:hover .bn-navi{opacity:1;}
+
+.bn-large{height:50px;}
+.bn-large>.bn-title{height:50px;}
+.bn-large>.bn-title>h2{line-height:50px; font-size:26px;}
+.bn-large>.bn-title>span{top:15px;}
+.bn-large>ul{height:50px; left:250px; font-size:20px;}
+.bn-large>ul>li{height:50px; line-height:50px;}
+.bn-large>.bn-navi{height:50px; }
+.bn-large>.bn-navi>span{height:50px;}
+
+.bn-small{height:30px;}
+.bn-small>.bn-title{height:30px;}
+.bn-small>.bn-title>h2{line-height:30px; font-size:18px;}
+.bn-small>.bn-title>span{top:5px;}
+.bn-small>ul{height:30px; left:200px; font-size:14px;}
+.bn-small>ul>li{height:30px; line-height:30px;}
+.bn-small>.bn-navi{height:30px; }
+.bn-small>.bn-navi>span{height:30px;}
+
+/*color styles -----------------------------*/
+.bn-red{border-color:#f44a56;}
+.bn-red>.bn-title{background:#f44a56;}
+.bn-red>.bn-title>span{border-left-color:#f44a56;}
+.bn-red>ul>li>a:hover,.bn-red>ul>li>a>span{color:#f44a56;}
+
+.bn-green{border-color:#27ae60;}
+.bn-green>.bn-title{background:#27ae60;}
+.bn-green>.bn-title>span{border-left-color:#27ae60;}
+.bn-green>ul>li>a:hover,.bn-green>ul>li>a>span{color:#27ae60;}
+
+.bn-purple{border-color:#795aac;}
+.bn-purple>.bn-title{background:#795aac;}
+.bn-purple>.bn-title>span{border-left-color:#795aac;}
+.bn-purple>ul>li>a:hover,.bn-purple>ul>li>a>span{color:#795aac;}
+
+.bn-turquoise{border-color:#1fb5ad;}
+.bn-turquoise>.bn-title{background:#1fb5ad;}
+.bn-turquoise>.bn-title>span{border-left-color:#1fb5ad;}
+.bn-turquoise>ul>li>a:hover,.bn-turquoise>ul>li>a>span{color:#1fb5ad;}
+
+.bn-orange{border-color:#f46e27;}
+.bn-orange>.bn-title{background:#f46e27;}
+.bn-orange>.bn-title>span{border-left-color:#f46e27;}
+.bn-orange>ul>li>a:hover,.bn-orange>ul>li>a>span{color:#f46e27;}
+
+.bn-black{border-color:#333;}
+.bn-black>.bn-title{background:#333;}
+.bn-black>.bn-title>span{border-left-color:#333;}
+.bn-black>ul>li>a:hover,.bn-black>ul>li>a>span{color:#333;}
+
+.bn-yellow{border-color:#d3ac23;}
+.bn-yellow>.bn-title{background:#d3ac23;}
+.bn-yellow>.bn-title>span{border-left-color:#d3ac23;}
+.bn-yellow>ul>li>a:hover,.bn-yellow>ul>li>a>span{color:#d3ac23;}
+
+.bn-light{border-color:#DDD;}
+.bn-light>.bn-title{background:#DDD;}
+.bn-light>.bn-title>h2{color:#333;}
+.bn-light>.bn-title>span{border-left-color:#DDD;}
+.bn-light>ul>li>a:hover,.bn-light>ul>li>a>span{color:#DDD;}
+
+.bn-pink{border-color:#d65aac;}
+.bn-pink>.bn-title{background:#d65aac;}
+.bn-pink>.bn-title>span{border-left-color:#d65aac;}
+.bn-pink>ul>li>a:hover,.bn-pink>ul>li>a>span{color:#d65aac;}
+
+.bn-darkred{border-color:#d01e1e;}
+.bn-darkred>.bn-title{background:#d01e1e;}
+.bn-darkred>.bn-title>span{border-left-color:#d01e1e;}
+.bn-darkred>ul>li>a:hover,.bn-darkred>ul>li>a>span{color:#d01e1e;}
+
+.bn-bordernone{border:none;}
+.bn-italic>ul>li>a{font-style:italic;}
+.bn-bold>ul>li>a{font-weight:bold;}
+
+.breakingNews>.bn-navi,
+.breakingNews>ul>li>a,
+.breakingNews>.bn-navi>span{transition: .25s linear;-moz-transition: .25s linear;-webkit-transition: .25s linear;}
+</style>
+<body>
+    <div style="width:100%; max-width:960px; margin:0 auto; padding:0 20px 50px 20px; box-sizing:border-box;">
+
+        <div class="breakingNews bn-bordernone bn-red" id="bn1">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">News From CNN</h2><span></span></div>
+            <ul style="left: 208px;">
+                <li style="display: none; width: 100%;"><a href="#">Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="width: 100%; display: block;"><a href="#">Vance and Trump inconsistent on question of national abortion ban</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-green" id="bn4">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">Testimonials</h2><span></span></div>
+            <ul style="left: 177px;">
+                <li style="display: block; top: -60px;"><a href="#"><span>Albert Einstein</span> - Lorem Ipsum is simply dummy text of the printing and typesetting industry</a></li>
+                <li style="top: -60px; display: block;"><a href="#"><span>Nelson Mandela</span> - Lorem Ipsum has been the industry's standard dummy text ever since the</a></li>
+                <li style="top: 0px; display: block;"><a href="#"><span>Mohandas Karamçand Gandi</span> “It's easy to stand in the crowd but it takes courage to stand alone."</a></li>
+                <li style="top: -60px; display: block;"><a href="#"><span>Atatürk</span> - Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia</a></li>
+                <li style="top: 60px; display: block;"><a href="#"><span>Napolyon</span> - The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-bordernone bn-yellow" id="bn2">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">BREAKING NEWS</h2><span></span></div>
+            <ul style="left: 216px;">
+                <li style="display: block; width: 94.0032%; overflow: hidden;"><a href="#">Hundreds of workers strike at major Samsung factory in India</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-turquoise" id="bn3">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">NEWS</h2><span></span></div>
+            <ul style="left: 121px;">
+                <li style="display: block; top: -60px;"><a href="#">Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="top: 0px; display: block;"><a href="#">San Francisco 49ers spoil Aaron Rodgers’ return to NFL action with dominant win over New York Jets</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-bordernone bn-orange" id="bn5">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">NEWS</h2><span></span></div>
+            <ul style="left: 121px;">
+                <li style="display: list-item;"><a href="#">Takeaways from the ABC presidential debate between Donald Trump and Kamala Harris</a></li>
+                <li><a href="#">Nullam sit amet nisl ex</a></li>
+                <li><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <!-- <div class="breakingNews bn-bordernone bn-purple" id="bn6">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">RSS</h2><span></span></div>
+            <ul style="left: 103px;">
+                <li style="display: none; width: 100%;"><a href="#">Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li style="width: 100%; display: block;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div> -->
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-bordernone bn-darkred" id="bn7">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">Latest News</h2><span></span></div>
+            <ul style="left: 174px;">
+                <li style="display: block; top: -60px;"><a href="#"><span>CNN News</span> - Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li style="top: -60px; display: block;"><a href="#"><span>BBC News</span> - Nullam sit amet nisl ex</a></li>
+                <li style="top: -60px; display: block;"><a href="#"><span>CNN News</span> - Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li style="top: 0px; display: block;"><a href="#"><span>JOB News:</span> National Highways Authority of India New Delhi</a></li>
+                <li style="top: -60px; display: block;"><a href="#"><span>YAHOO News</span> - Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="top: 60px; display: block;"><a href="#"><span>BBC News</span> - Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-bordernone bn-black" id="bn8">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">Bulletin</h2><span></span></div>
+            <ul style="left: 138px;">
+                <li style="display: list-item;"><a href="#">Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-small bn-bordernone bn-light" id="bn9">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">MESSAGES</h2><span></span></div>
+            <ul style="left: 153px;">
+                <li style="display: block; top: -60px;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Cras lorem augue, facilisis a commodo in, facilisis finibus libero vel ultrices.</a></li>
+                <li style="top: -60px; display: block;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="top: 0px; display: block;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="top: 60px; display: block;"><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- -->
+        <p>&nbsp;</p>
+        
+        <div class="breakingNews bn-large bn-bordernone bn-pink" id="bn10">
+            <div class="bn-title" style="width: auto;"><h2 style="display: inline-block;">Breaking News</h2><span></span></div>
+            <ul style="left: 235px;">
+                <li style="display: none; width: 100%;"><a href="#">Mauris interdum elit non sapien imperdiet, ac dapibus mi maximus</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Nullam sit amet nisl ex</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Maecenas imperdiet ante vitae neque facilisis cursus</a></li>
+                <li style="width: 100%; display: block;"><a href="#">Maecenas libero ipsum, placerat in mattis vel, tincidunt quis est.</a></li>
+                <li style="width: 100%; display: none;"><a href="#">Curabitur tortor libero, vehicula sagittis luctus sed, lobortis sed arcu</a></li>
+            </ul>
+            <div class="bn-navi">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    
+    </div>
+    <script>
+        (function(jQuery){
+
+$.fn.breakingNews = function(params){
+        var defaults={
+                width			:'100%',
+                modul			:'breakingnews',
+                color			:'default',
+                border			:false,
+                effect			:'fade',
+                fontstyle		:'normal',
+                autoplay		:false,
+                timer			:4000,
+                feed			:false,
+                feedlabels		:false,
+                feedcount		:5
+            };
+        var feeds=[];
+        var labels=[];
+        var params=$.extend(defaults,params);
+        
+        return this.each(function(){
+            //Variables------------------------------------
+            params.modul=$("#"+$(this).attr("id"));
+            var timername=params.modul;
+            var active=0;
+            var previous=0;
+            var count=params.modul.find("ul li").length;
+            var changestate=true;
+            
+            if (params.feed!=false)
+            {
+                getRSS();
+            }
+            else
+            {
+                params.modul.find("ul li").eq(active).fadeIn();
+            }
+            resizeEvent();
+            
+            if (params.autoplay)
+            {
+                timername=setInterval(function(){autoPlay()},params.timer);					
+                $(params.modul).on("mouseenter",function (){
+                    clearInterval(timername);
+                });
+                
+                $(params.modul).on("mouseleave",function (){
+                    timername=setInterval(function(){autoPlay()},params.timer);
+                });
+            }
+            else
+            {
+                clearInterval(timername);
+            }
+            
+            if (!params.border)
+            {
+                params.modul.addClass("bn-bordernone");
+            }
+
+            if (params.fontstyle=="italic")
+                params.modul.addClass("bn-italic");
+                
+            if (params.fontstyle=="bold")
+                params.modul.addClass("bn-bold");
+                
+            if (params.fontstyle=="bold-italic")
+                params.modul.addClass("bn-bold bn-italic");
+                
+            params.modul.addClass("bn-"+params.color);
+            
+            //Events---------------------------------------
+            $(window).on("resize",function (){
+                resizeEvent();
+            });
+            
+            params.modul.find(".bn-navi span").on("click",function(){
+                if (changestate)
+                {
+                    changestate=false;
+                    if ($(this).index()==0)
+                    {
+                        active--;
+                        if (active<0)
+                            active=count-1;
+                            
+                        changeNews();
+                    }
+                    else
+                    {
+                        active++;
+                        if (active==count)
+                            active=0;
+                        
+                        changeNews();
+                    }
+                }
+            });
+            
+            //functions------------------------------------
+            function resizeEvent()
+            {
+                if (params.modul.width()<480)
+                {
+                    params.modul.find(".bn-title h2").css({"display":"none"});
+                    params.modul.find(".bn-title").css({"width":10});
+                    params.modul.find("ul").css({"left":30});
+                }
+                else
+                {
+                    params.modul.find(".bn-title h2").css({"display":"inline-block"});
+                    params.modul.find(".bn-title").css({"width":"auto"});
+                    params.modul.find("ul").css({"left":$(params.modul).find(".bn-title").width()+30});
+                }
+            }
+            
+            function autoPlay()
+            {
+                active++;
+                if (active==count)
+                    active=0;
+                
+                changeNews();
+            }
+            
+            function changeNews()
+            {
+                if (params.effect=="fade")
+                {
+                    params.modul.find("ul li").css({"display":"none"});
+                    params.modul.find("ul li").eq(active).fadeIn("normal",function (){ 
+                        changestate=true;
+                    });
+                }
+                else if (params.effect=="slide-h")
+                {
+                    params.modul.find("ul li").eq(previous).animate({width:0},function(){
+                        $(this).css({"display":"none","width":"100%"});
+                        params.modul.find("ul li").eq(active).css({"width":0,"display":"block"});
+                        params.modul.find("ul li").eq(active).animate({width:"100%"},function(){
+                            changestate=true;
+                            previous=active;
+                        });
+                    });
+                }
+                else if (params.effect=="slide-v")
+                {
+                    if (previous<=active)
+                    {
+                        params.modul.find("ul li").eq(previous).animate({top:-60});
+                        params.modul.find("ul li").eq(active).css({top:60,"display":"block"});
+                        params.modul.find("ul li").eq(active).animate({top:0},function(){
+                            previous=active;
+                            changestate=true;
+                        });
+                    }
+                    else
+                    {
+                        params.modul.find("ul li").eq(previous).animate({top:60});
+                        params.modul.find("ul li").eq(active).css({top:-60,"display":"block"});
+                        params.modul.find("ul li").eq(active).animate({top:0},function(){
+                            previous=active;
+                            changestate=true;
+                        });
+                    }
+                }
+            }
+            
+            
+            function getRSSx(a,b,c)
+            {
+                c=new XMLHttpRequest;
+                c.open('GET',a);
+                c.onload=b;
+                c.send()
+            }
+            
+            function yql(a,b)
+            {
+                return 'https://query.yahooapis.com/v1/public/yql?q='+encodeURIComponent('select * from '+b+' where url=\"'+a+'\" limit '+params.feedcount)+'&format=json';
+            };
+            
+            function getRSS()
+            {
+                feeds=params.feed.split(",");
+                labels=params.feedlabels.split(",");
+                count=0;
+                params.modul.find("ul").html("");
+                xx=0;
+                for (k=0; k<feeds.length; k++)
+                {
+                    getRSSx(yql(feeds[k].trim(),'rss'),function()
+                    { 
+                        var resultx=JSON.parse(this.response); 
+                        resultx=resultx.query.results.item;			
+                        $(resultx).each(function(index, element) {
+                            count++;
+                            dataLink= $('<a>').prop('href', resultx[index].link).prop('hostname');
+                            params.modul.find("ul").append('<li><a target="_blank" href="'+resultx[index].link+'"><span>'+dataLink+'</span> - '+resultx[index].title+'</a></li>');
+                            if (xx==0)
+                                params.modul.find("ul li").eq(0).fadeIn();
+                            xx++;
+                            
+                        });
+                        
+                    })
+                }
+                
+            }
+
+        });
+        
+            
+    };
+    
+})(jQuery);
+
+
+$(window).load(function(e){
+$("#bn1").breakingNews({
+    effect		:"slide-h",
+    autoplay	:true,
+    timer		:3000,
+    color		:"red"
+});
+
+
+$("#bn2").breakingNews({
+    effect		:"slide-h",
+    autoplay	:true,
+    timer		:3000,
+    color		:"yellow"
+});
+
+
+$("#bn3").breakingNews({
+    effect		:"slide-v",
+    autoplay	:true,
+    timer		:3000,
+    color		:"turquoise",
+    border		:true
+});
+
+
+$("#bn4").breakingNews({
+    effect		:"slide-v",
+    autoplay	:true,
+    timer		:3000,
+    color		:'green',
+    border		:true
+});
+
+
+$("#bn5").breakingNews({
+    effect		:"slide-v",
+    color		:'orange'
+});
+
+
+$("#bn6").breakingNews({
+    effect		:"slide-h",
+    autoplay	:true,
+    timer		:3000,
+    color		:'purple'
+});
+
+
+$("#bn7").breakingNews({
+    effect		:"slide-v",
+    autoplay	:true,
+    timer		:3000,
+    color		:'darkred'
+});
+
+
+$("#bn8").breakingNews({
+    effect		:"slide-v",
+    color		:"black"
+});
+
+
+$("#bn9").breakingNews({
+    effect		:"slide-v",
+    autoplay	:true,
+    timer		:3000,
+    color		:"light"
+});
+
+
+$("#bn10").breakingNews({
+    effect		:"slide-h",
+    autoplay	:true,
+    timer		:3000,
+    color		:"pink"
+});
+});
+    </script>
+
+    
+    
+    
+    
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,651 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="manifest" href="site.webmanifest">
+    <title>Document</title>
+</head>
+<style>
+    /* ======================== 
+    CSS VARIABLES
+===========================*/
+:root {
+	--bs-primary: #ff0000;
+	--light: #fefefe !important;
+	--dark: #000000 !important;
+	--dark-blue: #191624 !important;
+	--gray: #d1d5db !important;
+
+	/* font family*/
+	--font-nunito: "Nunito", sans-serif !important;
+}
+/* ======================== 
+    Global CSS Style
+===========================*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+	--webkit-font-smoothing: antialiased;
+}
+
+body {
+	font-family: var(--font-nunito);
+	color: var(--gray);
+	overflow-x: hidden;
+}
+
+/* custom theme styles */
+.bg-primary {
+	background-color: var(--bs-primary) !important;
+}
+
+.bg-dark-blue {
+	background-color: var(--dark-blue) !important;
+}
+
+.bg-light {
+	background-color: var(--light) !important;
+}
+
+.text-dark-blue {
+	color: var(--dark-blue) !important;
+}
+
+.text-primary {
+	color: var(--bs-primary) !important;
+}
+
+.text-gray {
+	color: var(--gray) !important;
+}
+
+.btn-primary {
+	color: var(--light) !important;
+	background-color: var(--bs-primary) !important;
+	outline: none !important;
+	border: 0 !important;
+	transition: all 0.3s;
+}
+
+.btn-primary:hover {
+	background-color: var(--dark-blue) !important;
+}
+
+/* ======================== 
+    Local CSS Style
+===========================*/
+
+/* register/login  sliding modal */
+.modal-dialog {
+	width: auto;
+}
+
+.bg-img {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.form-sec {
+	transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
+}
+
+.form-sec.slide-out {
+	transform: translateX(-100%);
+}
+
+.form-sec.slide-in {
+	transform: translateX(0);
+}
+
+.form-sec.slide-in-reverse {
+	transform: translateX(100%);
+}
+
+.form-image .login-form-sec,
+.form-image .reg-form-sec {
+	opacity: 0 !important;
+	z-index: 5;
+	transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
+}
+
+.form-image.slide-in .login-form-sec {
+	opacity: 1 !important;
+	z-index: 10 !important;
+}
+
+.form-image.slide-in-reverse .reg-form-sec {
+	opacity: 1 !important;
+	z-index: 10 !important;
+}
+
+#formImage h2 {
+	font-size: 1.4rem !important;
+}
+
+#formImage p {
+	font-size: 0.8rem !important;
+}
+
+.loginForm,
+.registerForm {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--light);
+	transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
+	opacity: 0;
+	z-index: 0;
+}
+
+.terms-agree {
+	font-size: 0.9rem !important;
+}
+
+#formImage {
+	z-index: 5;
+}
+
+.form-show {
+	opacity: 1;
+	z-index: 5;
+}
+
+.social-login button.facebook {
+	background: #3b5998;
+}
+
+.social-login button.google {
+	background: #ea4335;
+}
+
+.social-login button {
+	color: #fff;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.social-login button.apple {
+	background: #000000;
+}
+
+.mobile-login-modal #pills-tab .nav-link {
+	background-color: rgb(238, 238, 238);
+	color: #0000008c;
+}
+
+.mobile-login-modal #pills-tab .nav-link.active {
+	background-color: rgba(255, 0, 0, 0.2);
+	color: var(--bs-primary);
+}
+
+/* ======================== 
+      RESPONSIVE CSS 
+===========================*/
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.modal-dialog {
+		width: 60%;
+	}
+
+	.modal-dialog.modal-dialog-scrollable .modal-body {
+		height: calc(100vh - 45vh) !important;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	#formImage h2 {
+		font-size: 1.7rem !important;
+	}
+
+	#formImage p {
+		font-size: 1.1rem !important;
+	}
+
+	.modal-dialog.modal-dialog-scrollable .modal-body {
+		height: calc(100vh - 25vh) !important;
+	}
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.modal-dialog.modal-dialog-scrollable .modal-body {
+		height: 35rem !important;
+	}
+}
+
+</style>
+<script>
+    "use strict";
+
+window.addEventListener("DOMContentLoaded", function () {
+	// main modal for large and small devices
+	const mainModal = new bootstrap.Modal(
+		document.getElementById("mainModal"),
+		{}
+	);
+
+	/* =====================================================
+  Tab Login/Register Modal For Small Devices
+  ======================================================== */
+	const registerLinkMobile = document.getElementById("registerLinkMobile");
+	const loginLinkMobile = document.getElementById("loginLinkMobile");
+	const loginTab = document.getElementById("pills-login");
+	const registerTab = document.getElementById("pills-register");
+	const loginTabButton = document.getElementById("tab-login");
+	const registerTabButton = document.getElementById("tab-register");
+
+	// mobile login/register modal tab
+	function switchTab(targetTab, currentTab, targetButton, currentButton) {
+		// Update the active state of the tab buttons
+		currentButton.classList.remove("active");
+		targetButton.classList.add("active");
+
+		// Hide the current tab content with fade effect
+		currentTab.classList.remove("show", "active");
+		currentTab.classList.add("fade");
+
+		setTimeout(function () {
+			currentTab.classList.remove("fade");
+			currentTab.classList.remove("show", "active");
+		}, 200);
+
+		// Show the target tab content with fade effect
+		targetTab.classList.add("show", "active");
+		setTimeout(function () {
+			targetTab.classList.remove("fade");
+		}, 200);
+	}
+
+	// tab activating process calling
+	registerLinkMobile.addEventListener("click", function (event) {
+		event.preventDefault();
+		switchTab(registerTab, loginTab, registerTabButton, loginTabButton);
+	});
+
+	loginLinkMobile.addEventListener("click", function (event) {
+		event.preventDefault();
+		switchTab(loginTab, registerTab, loginTabButton, registerTabButton);
+	});
+
+	/* =====================================================
+    Sliding Login/Register Modal Start With Medium Devices
+  ======================================================== */
+
+	const loginLink = document.getElementById("loginLink");
+	const registerLink = document.getElementById("registerLink");
+
+	const formImage = document.querySelector("#formImage");
+	const formContent = document.querySelector("#formContent");
+
+	const loginForm = document.querySelector(".loginForm");
+	const registerForm = document.querySelector(".registerForm");
+
+	// register slide
+	registerLink.addEventListener("click", function (event) {
+		event.preventDefault();
+		formImage.classList.remove("slide-in");
+		formImage.classList.add("slide-in-reverse");
+		formContent.classList.remove("slide-in");
+		formContent.classList.add("slide-out");
+		loginForm.classList.remove("form-show");
+		registerForm.classList.add("form-show");
+
+		// image changing with slide
+		formImage.style.backgroundImage = `url("https://i.ibb.co/2sL6wtP/movie-poster-register.jpg")`;
+	});
+
+	// login slide
+	loginLink.addEventListener("click", function (event) {
+		event.preventDefault();
+		formImage.classList.remove("slide-in-reverse");
+		formImage.classList.add("slide-in");
+		formContent.classList.remove("slide-in-reverse");
+		formContent.classList.add("slide-in");
+		registerForm.classList.remove("form-show");
+		loginForm.classList.add("form-show");
+
+		// image changing with slide
+		formImage.style.backgroundImage = `url("https://i.ibb.co/JQNt37h/avenger-movie-login.jpg")`;
+	});
+});
+
+</script>
+<body>
+    <!-- Use profer classes in the mainModal and add modal opening button for modal system I'm just showcasing the form yet-->
+
+<!-- Sliding Login/Register Main Section -->
+<div id="mainModal">
+	<!-- login/register start with medium devices -->
+	<div class="modal-dialog modal-dialog-scrollable d-none d-md-flex py-5">
+		<div class="modal-body p-0 rounded-5 shadow-lg">
+			<div class="modal-content h-100">
+				<div class="d-flex h-100">
+					<!-- sec image slider -->
+					<div id="formImage" class="form-sec form-image slide-in w-50 bg-img d-none d-md-block position-relative" style="
+                  background-image: url('https://i.ibb.co/JQNt37h/avenger-movie-login.jpg');
+                ">
+						<!-- login form image & intro -->
+						<div style="
+                    background-image: linear-gradient(
+                      to top,
+                      rgb(0, 0, 0),
+                      rgba(0, 0, 0, 0.8),
+                      rgba(0, 0, 0, 0.6),
+                      rgba(0, 0, 0, 0.4),
+                      rgba(0, 0, 0, 0.2)
+                    );
+                  " class="login-form-sec position-absolute top-0 left-0 end-0 bottom-0 w-100 h-100 d-flex align-items-start justify-content-center flex-column px-4 px-lg-5 gap-2">
+							<h2 class="text-light fw-bold">
+								Welcome back! Access Your Cinematic World
+							</h2>
+							<p>
+								Log In to Continue Your Movie Journey and Enjoy Personalized
+								Movie Recommendations, Watchlists, and More
+							</p>
+						</div>
+
+						<!-- register form image & intro -->
+						<div style="
+                    background-image: linear-gradient(
+                      to top,
+                      rgb(0, 0, 0),
+                      rgba(0, 0, 0, 0.8),
+                      rgba(0, 0, 0, 0.6),
+                      rgba(0, 0, 0, 0.4),
+                      rgba(0, 0, 0, 0.2)
+                    );
+                  " class="reg-form-sec position-absolute top-0 left-0 end-0 bottom-0 w-100 h-100 d-flex align-items-start justify-content-center flex-column px-4 px-lg-5 gap-2">
+							<h2 class="text-light fw-bold">
+								Become a Member of Our Movie Community
+							</h2>
+							<p>
+								Sign Up Now to Unlock Exclusive Content, Discover New
+								Releases, and Connect with Fellow Movie Enthusiasts
+							</p>
+						</div>
+					</div>
+
+					<div id="formContent" class="form-sec slide-in w-50 h-100">
+						<div class="formWrapper position-relative bg-light h-100 m-xxl-5">
+							<!-- login form slider -->
+							<div class="loginForm form-show bg-light p-4 h-100">
+								<h5 class="modal-title text-primary fw-bold fs-3" id="loginModalLabel">
+									Login
+								</h5>
+								<form action="#" method="post" class="mt-4 d-flex flex-column gap-3">
+									<div class="form-group">
+										<label class="text-dark fw-semibold mb-1" for="email">Enter Your Email Address</label>
+										<input type="email" class="form-control" id="email" />
+									</div>
+									<div class="form-group">
+										<label class="text-dark fw-semibold" for="password">Enter Your Password</label>
+										<input type="password" class="form-control" id="password" />
+									</div>
+
+									<div class="row row-cols-1 row-cols-xl-2 align-items-center justify-content-between">
+										<div class="d-flex flex-nowrap gap-2">
+											<input class="form-check-input" type="checkbox" id="remember-me" />
+											<label class="form-check-label text-dark-blue" for="remember-me">
+												Remember Me
+											</label>
+										</div>
+
+										<span><a href="#" class="forgot-pass text-decoration-none">Forgot Password ?</a></span>
+									</div>
+									<input type="submit" value="Login" class="btn btn-block w-100 btn-primary mt-1" />
+									<div class="social-login">
+										<span class="d-block text-center mb-1 text-muted">—— Or sign in with ——</span>
+										<div class="login-buttons d-flex justify-content-center gap-2">
+											<button class="facebook">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+													<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+												</svg>
+											</button>
+											<button class="apple">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+													<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+													<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+												</svg>
+											</button>
+											<button class="google">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+													<path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<p class="mt-3 mb-0 text-dark-blue text-center">
+									Don't have an account?
+									<a href="#" id="registerLink">Register here</a>
+								</p>
+							</div>
+
+							<!-- register form slider -->
+							<div class="registerForm bg-light p-3 p-lg-4">
+								<h5 class="modal-title text-primary fw-bold fs-3" id="registerModalLabel">
+									Register
+								</h5>
+								<form action="#" method="post" class="mt-4 d-flex flex-column gap-3">
+									<div class="form-group">
+										<label class="text-dark fw-semibold" for="full-name">Full Name</label>
+										<input type="text" class="form-control" id="full-name" />
+									</div>
+									<div class="form-group">
+										<label class="text-dark fw-semibold" for="reg-email">Email Address</label>
+										<input type="email" class="form-control" id="reg-email" />
+									</div>
+									<div class="form-group">
+										<label class="text-dark fw-semibold" for="reg-password">Choose Password</label>
+										<input type="password" class="form-control" id="reg-password" />
+									</div>
+									<div class="d-flex align-items-center flex-nowrap gap-2">
+										<input class="form-check-input" type="checkbox" id="terms-agree" checked />
+										<label class="terms-agree form-check-label text-dark-blue fs-6" for="terms-agree">
+											I agree to the
+											<a href="./terms_condition.html">Terms & Condition</a>,
+											<a href="./privacy_policy.html">Privacy & Policy</a>
+										</label>
+									</div>
+									<input type="submit" value="Register" class="btn btn-block w-100 btn-primary" />
+
+									<!-- social login -->
+									<div class="social-login">
+										<span class="d-block text-center mb-1 text-muted">—— Or sign up with ——</span>
+										<div class="login-buttons d-flex justify-content-center gap-2">
+											<button class="facebook">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+													<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+												</svg>
+											</button>
+											<button class="apple">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+													<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+													<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+												</svg>
+											</button>
+											<button class="google">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+													<path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</form>
+								<p class="mt-3 mb-0 text-dark-blue text-center">
+									Already have an account?
+									<a href="#" id="loginLink">Login here</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- login/register mobile -->
+	<div class="mobile-login-modal modal-dialog modal-dialog-scrollable d-md-none">
+		<div class="modal-body p-0">
+			<div class="modal-content p-2 p-sm-4 p-0 shadow-lg bg-light">
+				<!-- login/signup tabs btn is hidden just replace "d-none" to "d-flex" if need tab button  -->
+				<ul class="nav nav-pills d-none align-items-center gap-2 gap-sm-3 nav-justified mb-2 mb-sm-3 fw-semibold" id="pills-tab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="tab-login" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">
+							Login
+						</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="tab-register" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">
+							Register
+						</button>
+					</li>
+				</ul>
+
+				<!-- login/register content -->
+				<div class="tab-content">
+					<!-- login content -->
+					<div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+						<div class="login-form-mobile form-show bg-light p-2 p-sm-3">
+							<h5 class="modal-title text-primary fw-bolder fs-2 text-center" id="loginModalLabel">
+								Login
+							</h5>
+							<form action="#" method="post" class="mt-3 d-flex flex-column gap-3">
+								<div class="form-group">
+									<label class="text-dark fw-semibold mb-1" for="email-mobile">Enter Your Email Address</label>
+									<input type="email" class="form-control" id="email-mobile" />
+								</div>
+								<div class="form-group">
+									<label class="text-dark fw-semibold" for="password-mobile">Enter Your Password</label>
+									<input type="password" class="form-control" id="password-mobile" />
+								</div>
+
+								<div class="d-flex align-items-center justify-content-between py-1">
+									<div class="d-flex flex-nowrap gap-1 gap-sm-2">
+										<input class="form-check-input" type="checkbox" id="remember-me-mobile" />
+										<label class="form-check-label text-dark-blue" for="remember-me-mobile">
+											Remember Me
+										</label>
+									</div>
+
+									<span><a href="#" class="forgot-pass text-decoration-none">Forgot Password ?</a></span>
+								</div>
+								<input type="submit" value="Login" class="btn btn-block w-100 btn-primary my-1" />
+								<div class="social-login">
+									<span class="d-block text-center mb-2 text-muted">—— Or sign in with ——</span>
+									<div class="login-buttons d-flex justify-content-center gap-2">
+										<button class="facebook">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+												<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+											</svg>
+										</button>
+										<button class="apple">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+												<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+												<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+											</svg>
+										</button>
+										<button class="google">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+												<path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
+											</svg>
+										</button>
+									</div>
+								</div>
+							</form>
+
+							<p class="text-center my-2 mb-0 text-dark-blue">
+								Don't have an account?
+								<a href="#" id="registerLinkMobile">Register here</a>
+							</p>
+						</div>
+					</div>
+
+					<!-- register content -->
+					<div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+						<div class="register-form-mobile form-show bg-light p-2 p-sm-3">
+							<h5 class="modal-title text-primary fw-bolder fs-2 text-center" id="loginModalLabel">
+								Create an account
+							</h5>
+							<form action="#" method="post" class="mt-3 d-flex flex-column gap-3">
+								<div class="form-group">
+									<label class="text-dark fw-semibold mb-1" for="full-name-mobile">Full name</label>
+									<input type="text" class="form-control" id="full-name-mobile" />
+								</div>
+								<div class="form-group">
+									<label class="text-dark fw-semibold" for="reg-email-mobile">Email Address</label>
+									<input type="email" class="form-control" id="reg-email-mobile" />
+								</div>
+								<div class="form-group">
+									<label class="text-dark fw-semibold" for="reg-password-mobile">Choose Password</label>
+									<input type="password" class="form-control" id="reg-password-mobile" />
+								</div>
+								<div class="d-flex align-items-center flex-nowrap gap-2 py-1">
+									<input class="form-check-input" type="checkbox" id="terms-agree-mobile" checked />
+									<label class="terms-agree form-check-label text-dark-blue fs-6" for="terms-agree-mobile">
+										I agree to the
+										<a href="./terms_condition.html">Terms & Condition</a>,
+										<a href="./privacy_policy.html">Privacy & Policy</a>
+									</label>
+								</div>
+								<input type="submit" value="Register" class="btn btn-block w-100 btn-primary my-1" />
+								<div class="social-login">
+									<span class="d-block text-center mb-2 text-muted">—— Or sign up with ——</span>
+									<div class="login-buttons d-flex justify-content-center gap-2">
+										<button class="facebook">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+												<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+											</svg>
+										</button>
+										<button class="apple">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple" viewBox="0 0 16 16">
+												<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+												<path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282" />
+											</svg>
+										</button>
+										<button class="google">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+												<path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
+											</svg>
+										</button>
+									</div>
+								</div>
+							</form>
+
+							<p class="text-center my-2 mb-0 text-dark-blue">
+								Already have an account?
+								<a href="#" id="loginLinkMobile">Login here</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- If you appreciate this pen, please show your ❤ (love) for it. Your love and comment is my motivation and energy to create more pens like this. -->
+    
+</body>
+</html>

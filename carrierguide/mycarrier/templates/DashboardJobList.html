@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css/dist/index.css);
+</style>
+<body>
+  <!-- Banner -->
+<a href="https://webpixels.io/components?ref=codepen" class="btn w-full btn-primary text-truncate rounded-0 py-2 border-0 position-relative" style="z-index: 1000;">
+  <!-- <strong>Crafted with Webpixels CSS:</strong> The design system for Bootstrap 5. Browse all components → -->
+</a>
+
+<div class="p-10 bg-surface-secondary">
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-soft-success text-success">
+      <button type="submitt" style="position: absolute; left: 900px;" ><a href="{% url 'index' %}">Home</a></button>
+      <!-- <button type="submitt" style="position: absolute; left: 1000px;" ><a href="{% url 'jobseeker_activity' %}">My activity</a></button> -->
+      <!-- <button type="submitt" style="position: absolute; left: 1200px;" ><a href="{% url 'jobseeker_failurejobs' %}">Rejected jobs</a></button> -->
+      <h1><center>ALL JOBS</center></h1>
+      
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover table-nowrap">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Company Name</th>
+           
+
+            <th scope="col">Title</th>
+            <th scope="col">Position</th>
+            <th scope="col">Country</th>
+            <th scope="col">State</th>
+           
+            <th scope="col">Location</th>
+            <th scope="col">Posted date</th>
+            <th scope="col">End date</th>
+
+            <th scope="col">Nature</th>
+            <th scope="col">Education</th>
+            <th scope="col">Number of vacancy</th>
+            <th scope="col">Salary</th>
+
+            <!-- <th scope="col">Resume</th>
+            <th scope="col">Action</th> -->
+
+
+
+
+
+
+
+            <th></th>
+          </tr>
+        </thead>
+        {% for ja in jsj_list %}
+        <tbody>
+          <tr>
+            <td data-label="Job Title">
+              <img alt="..." src="{{ja.DETAILS_OF_JOB.DETAILS_OF_COMPANY.COMPANY_LOGO.url}}" class="avatar avatar-sm rounded-circle me-2">
+              <a class="text-heading font-semibold" href="#">
+                {{ ja.DETAILS_OF_JOB.DETAILS_OF_COMPANY.COMPANY_NAME }}
+              </a>
+            </td>
+            <td data-label="Email">
+              <span>{{ ja.DETAILS_OF_JOB.JOB_TITLE }}</span>
+            </td>
+            <td data-label="Phone">
+              <a class="badge bg-soft-success text-success" href="#">{{ ja.DETAILS_OF_JOB.JOB_POSITION }}</a>
+            </td>
+            <td data-label="Lead Score">
+              <a class="text-current" href="tel:202-555-0152"> {{ ja.DETAILS_OF_JOB.JOB_COUNTRY }}</a>
+            </td>
+            
+            <td data-label="">
+              <a class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_STATE }}</a>
+            </td>
+            <td data-label="Company">
+              <span class="badge bg-soft-success text-success">{{ ja.DETAILS_OF_JOB.JOB_LOCATION }}</span>
+            </td>
+            <td data-label="Company">
+              <span class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_POSTED_DATE }}</span>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_APPLICATION_END_DATE }}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_NATURE}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_EDUCATION_EXPERIENCE}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ ja.DETAILS_OF_JOB.JOB_NUMBER_OF_VACANCY}}</a>
+            </td>
+            <td data-label="">
+                <a class="badge bg-soft-success text-success" href="#">{{ ja.DETAILS_OF_JOB.JOB_SALARY}}</a>
+              </td>
+           
+            
+            
+          </tr>
+          {% endfor %}
+
+
+
+
+
+
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

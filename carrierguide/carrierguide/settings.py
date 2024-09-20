@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-md)&6ayleu@!c*^1*)!s#%(w-cv2b)9h=a95bs_4ovx!-yf_2-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
+=======
+ALLOWED_HOSTS = ['*','192.168.29.90']
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 
 
 # Application definition
@@ -38,9 +42,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mycarrier',
+<<<<<<< HEAD
 ]
 
 MIDDLEWARE = [
+=======
+    'storages',
+
+    
+    
+   
+    
+]
+
+MIDDLEWARE = [
+
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,6 +93,7 @@ WSGI_APPLICATION = 'carrierguide.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -84,18 +103,66 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':3306,
 
+=======
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME':'carrierguide',
+#         'USER': 'root',
+#         'PASSWORD':'',
+#         'HOST':'localhost',
+#         'PORT':3306,
+
+#     }
+# }
+
+
+#aws
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydata',
+        'USER': 'mycarrier',
+        'PASSWORD': 'Hermia_jaison26',
+        'HOST': "carrierguide.crgqgc6g0xfo.eu-north-1.rds.amazonaws.com",
+        'PORT': 5432,
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
     }
 }
 
 
 
 
+<<<<<<< HEAD
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your email host
 EMAIL_PORT = 587  # Replace with your email port
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hermiajaison26@gmail.com'  # Replace with your email
 EMAIL_HOST_PASSWORD = 'bxsh pohs rjee jbnl' 
+=======
+# aws S3
+
+AWS_ACCESS_KEY_ID = "AKIAQWHCQINAGD2NEAIF"
+AWS_SECRET_ACCESS_KEY = "YKwXk0QMqjUvqJhUQlKRAzUuBz1c8nmGyi+KieRf"
+AWS_STORAGE_BUCKET_NAME = "carrierbucket"
+AWS_S3_REGION_NAME = "eu-north-1"
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN')
+# Use S3 for storing static files
+# STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.eu-north-1.amazonaws.com/static/'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Use S3 for storing media files
+# MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.eu-north-1.amazonaws.com/media/'
+
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 
 
 
@@ -139,3 +206,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'hermiajaison26@gmail.com'
+EMAIL_HOST_PASSWORD = 'lzpo voos efok athk'
+
+# Twilio Credentials
+TWILIO_ACCOUNT_SID = 'AC28d188f3650e9fc9d27a3490ac945de6'
+TWILIO_AUTH_TOKEN = '690e65bab8e0a5cc07b1ed84ba618de5'
+TWILIO_PHONE_NUMBER = '+18286496019'
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4

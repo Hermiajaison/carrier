@@ -16,14 +16,24 @@
 <body>
   <!-- Banner -->
 <a href="https://webpixels.io/components?ref=codepen" class="btn w-full btn-primary text-truncate rounded-0 py-2 border-0 position-relative" style="z-index: 1000;">
+<<<<<<< HEAD
   <strong>Crafted with Webpixels CSS:</strong> The design system for Bootstrap 5. Browse all components →
+=======
+  <!-- <strong>Crafted with Webpixels CSS:</strong> The design system for Bootstrap 5. Browse all components → -->
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 </a>
 
 <div class="p-10 bg-surface-secondary">
 <div class="container">
   <div class="card">
     <div class="card-header bg-soft-success text-success">
+<<<<<<< HEAD
       <button type="submitt" style="position: absolute; left: 1150px;" ><a href="{% url 'index' %}">Home</a></button>
+=======
+      <button type="submitt" style="position: absolute; left: 900px;" ><a href="{% url 'index' %}">Home</a></button>
+      <button type="submitt" style="position: absolute; left: 1000px;" ><a href="{% url 'accepted_applications' %}">Accepted candidates</a></button>
+      <button type="submitt" style="position: absolute; left: 1180px;" ><a href="{% url 'rejected_applications' %}">Rejected candidates</a></button>
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
       <h6>Applicants</h6>
       
     </div>
@@ -59,6 +69,7 @@
         <tbody>
           <tr>
             <td data-label="Job Title">
+<<<<<<< HEAD
               <img alt="..." src="{{d.DETAILS_OF_EMPLOYER.jobseeker_IMAGE.url}}" class="avatar avatar-sm rounded-circle me-2">
               <a class="text-heading font-semibold" href="#">
                 {{ d.DETAILS_OF_EMPLOYER.jobseeker_name }}
@@ -98,6 +109,47 @@
            
             <td data-label="">
               <form action="{{ d.DETAILS_OF_EMPLOYER.jobseeker_resume.url }}" method="get">
+=======
+              <img alt="..." src="{{d.DETAILS_OF_EMPLOYEE.jobseeker_IMAGE.url}}" class="avatar avatar-sm rounded-circle me-2">
+              <a class="text-heading font-semibold" href="#">
+                {{ d.DETAILS_OF_EMPLOYEE.jobseeker_name }}
+              </a>
+            </td>
+            <td data-label="Email">
+              <span>{{ d.DETAILS_OF_EMPLOYEE.jobseeker_profession }}</span>
+            </td>
+            <td data-label="Phone">
+              <a class="text-current" href="mailto:robert.fox@example.com">{{ d.DETAILS_OF_EMPLOYEE.EMAIL }}</a>
+            </td>
+            <td data-label="Lead Score">
+              <a class="text-current" href="tel:202-555-0152"> {{ d.DETAILS_OF_EMPLOYEE.jobseeker_mobilenumber }}</a>
+            </td>
+            
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_address }}</a>
+            </td>
+            <td data-label="Company">
+              <span class="badge bg-soft-success text-success">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_education }}</span>
+            </td>
+            <td data-label="Company">
+              <span class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_skills }}</span>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_state }}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_location}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_experience}}</a>
+            </td>
+            <td data-label="">
+              <a class="text-current" href="#">{{ d.DETAILS_OF_EMPLOYEE.jobseeker_englishlevel}}</a>
+            </td>
+           
+            <td data-label="">
+              <form action="{{ d.DETAILS_OF_EMPLOYEE.jobseeker_resume.url }}" method="get">
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
                 <button type="submit" class="text-current">
                   View Resume
                 </button>
@@ -110,11 +162,17 @@
               <button type="submit" >accept</button>
               </form><br>
 
+<<<<<<< HEAD
               <form method="post" action="{% url 'job_reject' d.id %}">
                 {% csrf_token %}
               <button type="submit" >Reject</button>
               </form>
 
+=======
+        
+             <a href="{% url 'job_reject' d.id %}"> <button type="submit" >Reject</button></a>
+           
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
             </td>
             
           </tr>

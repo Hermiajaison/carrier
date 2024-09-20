@@ -4,6 +4,13 @@
 {% load static %}
 
 
+<<<<<<< HEAD
+=======
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 
 
 
@@ -70,7 +77,11 @@
                                 </div>
                                <ul>
                                    <li>{{job.JOB_REQUIRED_KNOWLEDGE}}</li>
+<<<<<<< HEAD
                                    <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
+=======
+                                   <!-- <li>Mobile Applicationin iOS/Android/Tizen or other platform</li> -->
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
                                    <!-- <li>Research and code , libraries, APIs and frameworks</li>
                                    <li>Strong knowledge on software development life cycle</li>
                                    <li>Strong problem solving and debugging skills</li> -->
@@ -83,10 +94,17 @@
                                 </div>
                                <ul>
                                    <li>{{job.JOB_EDUCATION_EXPERIENCE}}</li>
+<<<<<<< HEAD
                                    <li>Direct response email experience</li>
                                    <li>Ecommerce website design experience</li>
                                    <li>Familiarity with mobile and web apps preferred</li>
                                    <li>Experience using Invision a plus</li>
+=======
+                                   <!-- <li>Direct response email experience</li>
+                                   <li>Ecommerce website design experience</li>
+                                   <li>Familiarity with mobile and web apps preferred</li>
+                                   <li>Experience using Invision a plus</li> -->
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
                                </ul>
                             </div>
                         </div>
@@ -108,6 +126,7 @@
                               <li>Application End date : <span>{{job.JOB_APPLICATION_END_DATE}}</span></li>
                           </ul>
 
+<<<<<<< HEAD
                          <div class="apply-btn2">
                             {% if request.session.is_logged_in_em %}
                             <a href="{% url 'apply_job' job.id %}" class="btn">Apply Now</a>
@@ -117,6 +136,33 @@
                          <br><br>
                          <div class="apply-btn2">
                             <a href="{% url 'index' %}" class="btn">Back</a>
+=======
+                        <div class="apply-btn2">
+                            {% if job_status == True %}
+                                    <a class="btn">Applied</a>
+                            {% else %}
+                                {% if request.session.is_logged_in_em %}
+                                    <a href="{% url 'apply_job' job.id %}" class="btn">Apply Now</a>
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                         <br><br>
+                         <div class="apply-btn2">
+                            {% if request.session.is_logged_in %}
+                            <a href="{% url 'edit_jobdetails' job.id %}" class="btn">Edit Details</a>
+                            {% endif %}
+                            <a href="{% url 'index' %}" class="btn">Back</a>
+
+                            <!-- <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_OyuWVbFetdfJ9f" async> </script> </form>
+
+                             -->
+
+                             <!-- <p>TEST</p> -->
+
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
                          </div>
                        </div>
                         <div class="post-details4  mb-50">

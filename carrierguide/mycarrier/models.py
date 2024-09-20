@@ -17,7 +17,11 @@ class User_employer(models.Model):
     EMPLOYER_PHONE=models.CharField(max_length=100)
     EMPLOYER_IMAGE=models.ImageField(upload_to='profile_pfp',blank=True, null=True)
     COMPANY_LOGO=models.ImageField(upload_to='profile_pfp',blank=True, null=True)
+<<<<<<< HEAD
 
+=======
+    verify=models.BooleanField(default=False)
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 
 class User_jobseeker(models.Model):
     USERNAME=models.CharField(max_length=100)
@@ -35,6 +39,10 @@ class User_jobseeker(models.Model):
     jobseeker_englishlevel=models.CharField(max_length=100)
     jobseeker_IMAGE=models.ImageField(upload_to='profile_pfp',blank=True, null=True)
     jobseeker_resume=models.FileField(upload_to='profile_pfp',blank=True, null=True)
+<<<<<<< HEAD
+=======
+    verify=models.BooleanField(default=False)
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
 
 
 
@@ -63,8 +71,14 @@ class EMPLOYER_post_a_job(models.Model):
 
 class jobseeker_apply_job(models.Model):
     user=models.CharField(max_length=100)
+<<<<<<< HEAD
     status=models.BooleanField()
     DETAILS_OF_EMPLOYER=models.ForeignKey(User_jobseeker,on_delete=models.CASCADE)
+=======
+    status=models.BooleanField(default=False)
+    reject=models.BooleanField(default=False)
+    DETAILS_OF_EMPLOYEE=models.ForeignKey(User_jobseeker,on_delete=models.CASCADE)
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
     DETAILS_OF_JOB=models.ForeignKey(EMPLOYER_post_a_job,on_delete=models.CASCADE)
 
 
@@ -78,8 +92,11 @@ class jobseeker_apply_job(models.Model):
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0133ccfa30fe07cdb7d6867cc3c5465c95f493f4
      
 
 
